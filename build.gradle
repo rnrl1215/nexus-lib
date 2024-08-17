@@ -8,7 +8,7 @@ plugins {
 }
 
 
-group = 'com.example'
+group = 'com.utils'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -48,7 +48,7 @@ publishing {
 	publications {
 		myPublication(MavenPublication) {
 			groupId = 'common.utils'
-			artifactId = 'skahn'
+			artifactId = 'cafe'
 			version = '0.0.1-SNAPSHOT'
 			artifact sourceJar
 			from components.java
