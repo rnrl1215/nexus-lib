@@ -1,0 +1,83 @@
+
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.2'
+	id 'io.spring.dependency-management' version '1.1.6'
+	id 'maven-publish'
+}
+
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+
+task sourceJar(type: Jar) {
+	from sourceSets.main.allJava
+	archiveClassifier = "sources"
+}
+
+publishing {
+	repositories {
+		maven {
+
+			def releasesRepoUrl ='http://localhost:8081/repository/p8-lab-release/'
+			def snapshotsRepoUrl = 'http://localhost:8081/repository/p8-lab-snapshot/'
+			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+			allowInsecureProtocol = true
+
+			credentials {
+				username 'admin'
+				password 'admin'
+			}
+		}
+	}
+
+	publications {
+		myPublication(MavenPublication) {
+			groupId = 'common.utils'
+			artifactId = 'skahn'
+			version = '0.0.1-SNAPSHOT'
+			artifact sourceJar
+			from components.java
+
+			versionMapping {
+				usage('java-api') {
+					fromResolutionOf('runtimeClasspath')
+				}
+				usage('java-runtime') {
+					fromResolutionResult()
+				}
+			}
+		}
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
