@@ -1,4 +1,4 @@
-package com.example.common;
+package com.p8lab.common.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

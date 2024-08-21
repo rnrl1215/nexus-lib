@@ -1,13 +1,13 @@
-package com.example.common;
+package com.p8lab.common;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class P8labCommonApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(P8labCommonApplication.class, args);
 	}
 
 }

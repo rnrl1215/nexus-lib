@@ -1,9 +1,8 @@
-package com.example.common;
+package com.p8lab.common;
 
+import com.p8lab.common.enums.YNType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class YNTypeTest {
     @Test

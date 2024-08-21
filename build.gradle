@@ -8,7 +8,7 @@ plugins {
 }
 
 
-group = 'com.utils'
+group = 'com.p8lab'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -23,18 +23,17 @@ configurations {
 	}
 }
 
-
-task sourceJar(type: Jar) {
-	from sourceSets.main.allJava
-	archiveClassifier = "sources"
+jar{
+	enabled=true
+	archiveClassifier = '' // Classifier 제거
 }
 
 publishing {
 	repositories {
 		maven {
 
-			def releasesRepoUrl ='http://localhost:8081/repository/p8-lab-release/'
-			def snapshotsRepoUrl = 'http://localhost:8081/repository/p8-lab-snapshot/'
+			def releasesRepoUrl ='http://localhost:8081/repository/p8lab-release/'
+			def snapshotsRepoUrl = 'http://localhost:8081/repository/p8lab-snapshot/'
 			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 			allowInsecureProtocol = true
 
@@ -47,12 +46,10 @@ publishing {
 
 	publications {
 		myPublication(MavenPublication) {
-			groupId = 'common.utils'
-			artifactId = 'cafe'
-			version = '0.0.1-SNAPSHOT'
-			artifact sourceJar
+			groupId = 'com.p8lab'
+			artifactId = 'common'
+			version = "0.0.2-SNAPSHOT"
 			from components.java
-
 			versionMapping {
 				usage('java-api') {
 					fromResolutionOf('runtimeClasspath')
